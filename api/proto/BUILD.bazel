@@ -20,7 +20,13 @@ go_proto_library(
 
 go_grpc_library(
     name = "api_grpc_library",
+    go_deps = [
+        "@org_golang_google_grpc//codes:go_default_library",
+        "@org_golang_google_grpc//status:go_default_library",
+    ],
     importpath = "github.com/celsosantos/gloo-playground/api",
     visibility = ["//visibility:public"],
-    deps = [":api_service_proto_library"],
+    deps = [
+        ":api_service_proto_library",
+    ],
 )

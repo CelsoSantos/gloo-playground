@@ -14,7 +14,7 @@
 # file. This feature will certainly be available soon... so let's be prepared.
 # -----------------------------------------------------------------------------
 
-ARG ARG_BAZEL_VERSION=0.29.1
+ARG ARG_BAZEL_VERSION=1.2.1
 
 
 # -----------------------------------------------------------------------------
@@ -73,13 +73,13 @@ RUN apt-get update \
 	github.com/cweill/gotests/... \
 	golang.org/x/tools/cmd/goimports \
 	golang.org/x/lint/golint \
-	golang.org/x/tools/cmd/gopls \
+	golang.org/x/tools/gopls \
 	github.com/alecthomas/gometalinter \
 	honnef.co/go/tools/... \
 	github.com/golangci/golangci-lint/cmd/golangci-lint \
 	github.com/mgechev/revive \
 	github.com/bazelbuild/bazelisk \
-	github.com/derekparker/delve/cmd/dlv 2>&1 \
+	github.com/go-delve/delve/cmd/dlv 2>&1 \
 	#
 	# Clean up
 	&& apt-get autoremove -y \
