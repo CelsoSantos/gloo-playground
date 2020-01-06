@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package api;
+
+message ProtoRequest {}
+
+message ProtoResponse { string message = 1; }
+
+service ProtoService {
+  rpc ReplyHello(ProtoRequest) returns (ProtoResponse) {}
+}

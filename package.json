@@ -1,0 +1,13 @@
+{
+	"name": "gloo-playgound",
+	"version": "0.0.1",
+	"license": "MIT",
+	"dependencies": {},
+	"devDependencies": {
+		"@bazel/bazel": "^1.2.0",
+		"@bazel/buildifier": "^0.29.0",
+		"@bazel/ibazel": "^0.10.3",
+		"@bazel/typescript": "^0.42.3",
+		"typescript": "^3.6.3"
+	}
+}

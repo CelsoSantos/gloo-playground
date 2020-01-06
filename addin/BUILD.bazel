@@ -1,0 +1,46 @@
+# load("@build_bazel_rules_nodejs//:defs.bzl", "nodejs_binary")
+
+load("@addin_npm//webpack-cli:index.bzl", webpack = "webpack_cli")
+
+package(default_visibility = ["//visibility:public"])
+
+# TODO: FIX. It's not producing the expected output
+webpack(
+    name = "bundle",
+    outs = ["app.bundle.js"],
+    args = [
+        "-p",
+        "--mode",
+        "production",
+        "--https",
+        "false",
+        "-o",
+        "$@",
+    ],
+    data = [
+        "webpack.config.js",
+        "@addin_npm//:node_modules",
+    ],
+)
+
+# TODO: Try this approach
+# nodejs_binary(
+#     name = "webpack_binary",
+#     entry_point = "node_modules/webpack-cli",
+#     install_source_map_support = False,
+#     node_modules = "@addin_npm//:node_modules",
+# )
+
+# genrule(
+#     name = "webpack_output",
+#     srcs = glob(["**/*"]),
+#     outs = ["dist/index.js"],
+#     cmd = "$(location :webpack_binary) --output-path $(@D) --config " + package_name() + "/webpack.config.js",
+#     message = "Webpack",
+#     output_to_bindir = True,
+#     tools = [
+#         ":webpack_binary",
+#         "@addin_npm//:node_modules",
+#     ],
+#     visibility = ["//:__pkg__"],
+# )

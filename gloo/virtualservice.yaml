@@ -1,0 +1,53 @@
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  name: playground
+  namespace: gloo-system
+spec:
+  # ssl_config:
+  #   secret_ref:
+  #     name: wildcard
+  #     namespace: default
+  virtualHost:
+    domains:
+      - "apis.example.com"
+    options:
+      cors:
+        allowCredentials: true
+        allowHeaders:
+          - "*"
+        allowMethods:
+          - "*"
+        allowOrigin:
+          - "*"
+        exposeHeaders:
+          - "*"
+    routes:
+      - matchers:
+          - prefix: /grpc-demo/
+            methods:
+              - GET
+        routeAction:
+          single:
+            # # With this enabled, the services DOES reply to HTTP requests as expected
+            destinationSpec:
+              grpc:
+                function: ReplyHello
+                parameters:
+                  path: /grpc-demo/
+                package: api
+                service: ProtoService
+            upstream:
+              name: CHANGE_ME
+              namespace: gloo-system
+      - matchers:
+          - prefix: /http-demo/
+            methods:
+              - GET
+        routeAction:
+          single:
+            kube:
+              ref:
+                name: CHANGE_ME
+                namespace: default
+              port: 80

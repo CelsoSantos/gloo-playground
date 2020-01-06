@@ -1,0 +1,48 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+
+# -----------------------------------------------------------------------------
+# gRPC client executable and library
+# -----------------------------------------------------------------------------
+
+# Build gRPC client
+go_binary(
+    name = "playground_client",
+    embed = [":go_default_library"],
+    pure = "off",
+    visibility = ["//visibility:public"],
+)
+
+# Build gRPC client library
+go_library(
+    name = "go_default_library",
+    srcs = ["client.go"],
+    importpath = "com.github/celsosantos/gloo-playground/client",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//api/proto:api_grpc_library",
+        "@com_github_golang_protobuf//proto:go_default_library",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//reflection:go_default_library",
+    ],
+)
+
+go_image(
+    name = "playground_client_image_base",
+    binary = ":playground_client",
+)
+
+container_image(
+    name = "playground_client_image_build",
+    base = ":playground_client_image_base",
+)
+
+container_push(
+    name = "playground_client_image_push",
+    format = "Docker",
+    image = ":playground_client_image_build",
+    registry = "index.docker.io",
+    repository = "$(DOCKER_REGISTRY_CLI_IMAGE_NAME)",
+    tag = "latest",
+)

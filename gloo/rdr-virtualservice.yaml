@@ -1,0 +1,14 @@
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  name: rdr-https
+  namespace: gloo-system
+spec:
+  virtualHost:
+    domains:
+      - "*.example.com"
+    routes:
+      - matchers:
+          - prefix: /
+        redirectAction:
+          httpsRedirect: true

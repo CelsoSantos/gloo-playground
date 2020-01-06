@@ -1,0 +1,25 @@
+# load("@addin_client_npm//typescript:index.bzl", "tsc")
+load("@npm_bazel_typescript//:index.bzl", "ts_library")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_library(
+    name = "app",
+    srcs = ["ServiceServiceClientPb.ts"],
+)
+
+# tsc(
+#     name = "compile",
+#     outs = ["grpc-cli.js"],
+#     args = [
+#         "$(location ServiceServiceClientPb.ts)",
+#         "--outDir",
+#         "$(RULEDIR)",
+#         "--lib",
+#         "es2015,dom",
+#     ],
+#     data = [
+#         "service_pb.d.ts",
+#         "service_pb.js",
+#     ],
+# )

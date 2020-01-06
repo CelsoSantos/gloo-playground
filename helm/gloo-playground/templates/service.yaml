@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "gloo-playground.fullname" . }}
+  labels:
+{{ include "gloo-playground.labels" . | indent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
+      name: h2-gloo-playground
+  selector:
+    app.kubernetes.io/name: {{ include "gloo-playground.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

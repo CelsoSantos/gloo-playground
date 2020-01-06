@@ -1,0 +1,79 @@
+# -----------------------------------------------------------------------------
+# Basic settings
+# -----------------------------------------------------------------------------
+
+
+# -----------------------------------------------------------------------------
+# General project setttings
+# -----------------------------------------------------------------------------
+
+PROJECT_NAME := gloo-playground
+PROJECT_VERSION := 0.1.0
+
+# -----------------------------------------------------------------------------
+# Development sandbox setttings
+# -----------------------------------------------------------------------------
+
+# Development sandbox Docker image and container names
+SANDBOX_IMAGE_NAME := $(PROJECT_NAME)-sandbox
+SANDBOX_CONTAINER_NAME := $(PROJECT_NAME)-sandbox
+
+# Development sandbox Linux distro
+#SANDBOX_LINUX := l.gcr.io/google/bazel:$(BAZEL_VERSION)
+SANDBOX_LINUX := ubuntu:18.04
+
+# Production container(s) Linux distro
+PRODUCTION_LINUX := alpine:3.9
+
+# Linux distro used to debug Golang applications
+DEBUG_LINUX := golang:1.12.6-alpine3.9
+
+# Folder that will cache Bazel results to share across builds (in ephemereal sandbox container) 
+BAZEL_BUILDS := "/var/bazel/builds"
+
+# Bazel building tool version
+BAZEL_VERSION := 0.29.1
+
+# Go language version
+GOLANG_VERSION := 1.12.4
+
+# -----------------------------------------------------------------------------
+# Docker settings
+# -----------------------------------------------------------------------------
+
+# Docker registry image name (used to run a private registry)
+DOCKER_REGISTRY_IMAGE_NAME := registry:latest
+DOCKER_REGISTRY_CLI_IMAGE_NAME := registry:latest
+
+# Docker registry container port
+DOCKER_REGISTRY_PORT := 5000
+
+# -----------------------------------------------------------------------------
+# Minikube Development sandbox setttings
+# -----------------------------------------------------------------------------
+
+MK_SANDBOX_K8S_VERSION := v1.15.4
+
+# Development sandbox Docker image and container names
+MK_SANDBOX_EXTRA_CONFIGS := apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
+
+# Gloo Version
+GLOO_VERSION := 0.20.11
+
+# Knative Serving Version to install
+MK_KNATIVE_SERVING_VERSION := 0.8.1
+
+# Knative Eventing Version to install
+MK_KNATIVE_EVENTING_VERSION := 0.8.0
+
+# Operator Framework Version
+MK_OPERATOR_FRAMEWORK_VERSION := 0.10.0
+
+# Strimzi Operator Version
+MK_STRIMZI_OPERATOR_VERSION := 0.13.0
+
+# Cert-Manager Version & Settings
+MK_CERT_MGMR_VERSION := 0.10.0
+MK_CERT_MGMR_ZONE := us-east-2
+MK_CERT_MGMR_ACCESS_KEY := AK(...)SI
+MK_CERT_MGMR_SECRET_ACCESS_KEY := y(...)n
