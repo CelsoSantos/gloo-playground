@@ -10,7 +10,7 @@
 		"@bazel/typescript": "^0.42.3",
 		"@grpc/proto-loader": "^0.5.3",
 		"google-protobuf": "^3.11.1",
-		"grpc": "^1.24.2",
+		"grpc": "^1.24.9",
 		"grpc-web": "^1.0.7",
 		"typescript": "^3.6.3"
 	}
